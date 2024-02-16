@@ -1,4 +1,6 @@
 <?php
+// Auteur: RohanD
+// Functie: Product lijst
 
 abstract class Product {
     public $naam;
