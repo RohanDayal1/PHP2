@@ -33,7 +33,7 @@ class Music extends Product {
         }
         $nummersList .= "</ul>";
     
-        return "Artiest: " . $this->artiest . "<br> Nummers: " . $nummersList . "Omschrijving: " . $this->omschrijving;
+        return "Artiest: " . $this->artiest . "<br> Nummers: " . $nummersList . "Details: " . $this->omschrijving;
     }
     
 }
