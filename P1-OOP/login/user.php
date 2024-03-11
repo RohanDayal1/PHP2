@@ -4,6 +4,8 @@
 
 session_start();
 
+require '../vendor/autoload.php';
+
 class User {
     private $db;
 
