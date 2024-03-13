@@ -1,10 +1,6 @@
 <?php
-
 // Auteur: RohanD
-
 session_start();
-
-require '../vendor/autoload.php';
 
 class User {
     private $db;
@@ -23,7 +19,7 @@ class User {
         $stmt = $this->db->prepare($sql);
         
         $stmt->bindValue(':username', $username);
-        $stmt->bindValue(':password', $password);
+        $stmt->bindValue(':password', password_hash($password, PASSWORD_DEFAULT));
         $stmt->bindValue(':role', $role);
 
         try {
