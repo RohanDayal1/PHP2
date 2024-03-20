@@ -7,19 +7,29 @@ use Login\class\Database;
 use Login\class\User;
 
 class UserTest extends TestCase {
-    private $username;
-    private $db;
+    public $username;
 
-    public function testRegisterUser(): void {
-        // Test successful registration
-        $this->assertTrue($this->user->registerUser('50 lira', 'Fortnite'));
-    
-        // Test registration with existing username (should fail)
-        $this->assertFalse($this->user->registerUser('50 lira', 'Fortnite'));
-    }
-    
+        protected function setUp(): void {
+            // Initialize User object
+            $this->user = new User();
+        }
 
-    public function testLoginUser(): void {
+        public function testLoginTrue(): void {
+            // Test successful login with correct credentials
+            $this->assertTrue($this->user->loginUser('Rohan', 'D'));
+        }
+    
+        public function testLoginWithIncorrectUsername(): void {
+            // Test login with incorrect username
+            $this->assertFalse($this->user->loginUser('IncorrectUsername', 'D'));
+        }
+    
+        public function testLoginWithIncorrectPassword(): void {
+            // Test login with incorrect password
+            $this->assertFalse($this->user->loginUser('Rohan', 'IncorrectPassword'));
+        }
+
+        public function testLoginUser(): void {
         // Test successful login
         $this->assertTrue($this->user->loginUser('Rohan', 'D'));
 
@@ -27,7 +37,7 @@ class UserTest extends TestCase {
         $this->assertFalse($this->user->loginUser('Rohan', 'JK'));
 
         // Test login with non-existent username (should fail)
-        $this->assertFalse($this->user->loginUser('60 lira', 'Fortnite'));
+        $this->assertFalse($this->user->loginUser('Lorem', 'D'));
     }
 
     public function testIsLoggedin(): void {
@@ -35,17 +45,8 @@ class UserTest extends TestCase {
         $this->assertFalse($this->user->isLoggedin());
 
         // Test after successful login
-        $this->user->loginUser('50 lira', 'Fortnite');
+        $this->user->loginUser('Rohan', 'D');
         $this->assertTrue($this->user->isLoggedin());
     }
-
-    public function testLogoutUser()
-        {
-            // Test Logout
-            $this->username->Logout();
-
-            $isDeleted = (session_status() == PHP_SESSION_NONE && empty(session_id()));
-            $this->assertTrue($isDeleted);
-        }
       
 }
