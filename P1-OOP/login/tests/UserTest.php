@@ -13,7 +13,14 @@ class UserTest extends TestCase {
             // Initialize User object
             $this->user = new User();
         }
-
+        public function testRegisterUser(): void {
+            // Test successful registration
+            $this->assertTrue($this->user->registerUser('R0han', 'A'));
+    
+            // Test registration with existing username (should fail)
+            $this->assertFalse($this->user->registerUser('Rohan', 'D'));
+        }
+        
         public function testLoginTrue(): void {
             // Test successful login with correct credentials
             $this->assertTrue($this->user->loginUser('Rohan', 'D'));
@@ -48,5 +55,13 @@ class UserTest extends TestCase {
         $this->user->loginUser('Rohan', 'D');
         $this->assertTrue($this->user->isLoggedin());
     }
+    public function testLogoutUser()
+        {
+            // Test Logout
+            $this->username->Logout();
+
+            $isDeleted = (session_status() == PHP_SESSION_NONE && empty(session_id()));
+            $this->assertTrue($isDeleted);
+        }
       
 }
